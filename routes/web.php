@@ -11,6 +11,11 @@ Route::get('/', function () {
 });
 
 Route::get('/somar', function(Request $request) {
+    if (count($request->all())< 1) {
+        return response()->json([
+            'massage'=> 'Não há valores para soman'
+        ], 406);
+    }
     $soma= array_sum($request->all());
     return response()->json([
         'message' => 'somado com sucesso',
