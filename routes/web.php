@@ -13,7 +13,7 @@ Route::get('/', function () {
 Route::get('/somar', function(Request $request) {
     if (count($request->all())< 1) {
         return response()->json([
-            'massage'=> 'Não há valores para soman'
+            'massage'=> 'Não há valores para somar'
         ], 406);
     }
     $soma= array_sum($request->all());
