@@ -36,4 +36,9 @@ Route::prefix('/people')->group(function () {
         '/store',
         [PeopleController::class, 'store']
     );
+
+    Route::post(
+        '/storeInterests',
+        [PeopleController::class, 'storeInterests']
+    );
 });

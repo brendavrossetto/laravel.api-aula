@@ -16,6 +16,10 @@ class People extends Model
         'state',
         'country',
         'phone',
-        'BirthDate',
+        'birthDate',
     ];
+
+    public function interests() {
+        return$this->hasMany(Interests::class);
+    }
 }
