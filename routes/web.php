@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\PeopleController;
 use App\Models\People;
 use Illuminate\Http\Request;
@@ -41,4 +42,9 @@ Route::prefix('/people')->group(function () {
         '/storeInterests',
         [PeopleController::class, 'storeInterests']
     );
+});
+
+Route::prefix('/user') ->group(function() {
+    Route::post('/register' , 
+    [JWTAuthController::Class, 'register']);
 });
