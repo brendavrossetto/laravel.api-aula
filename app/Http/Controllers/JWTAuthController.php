@@ -36,7 +36,7 @@ class JWTAuthController extends Controller
         $cred = $request->only('email', 'password'); 
 
         try {
-            // Tentativa de autenticação
+            // Tentativa de autenticação se nn funcionar 
             if (!JWTAuth::attempt($cred)) {
                 return response()->json([
                     'error' => 'Invalid credentials'
@@ -44,17 +44,22 @@ class JWTAuthController extends Controller
             }
 
             // Se chegou aqui, a autenticação foi bem-sucedida
-            $user = auth()->user();
+            $user = JWTAuth::user();
 
             // Geração do token JWT
             $token = JWTAuth::fromUser($user);
 
             // Retorno da resposta com os dados do usuário e o token
-            return response()->json(compact('user', 'token'), 200);
+            return response()->json(compact( 'token'), 200);
         } catch (JWTException $e) {
             return response()->json([
                 'error' => 'Could not create token'
             ], 500);
         }
+    }
+
+    public function logout(){
+        JWTAuth::invalidate(JWTAuth::getToken());
+        return response()->json(['message' => 'Logout successfuly'], 200);
     }
 }
